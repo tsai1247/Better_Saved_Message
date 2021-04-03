@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Better-Saved-Message</string>
+    <string name="default_string">default</string>
+    <string name="label1">Link</string>
+    <string name="label2">Text</string>
+    <string name="label3">Command</string>
+    <string name="btn_enter">enter</string>
+    <string name="btn_clear">clear</string>
+
+    <string name="type_hint">Type Something…</string>
+</resources>
