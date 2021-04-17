@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private final Button[] labels = new Button[3];
     private Button btn_enter;
     private Button btn_clear;
+    private Button btn_search;
     private int Cur_Classification = 0;
     private int Cur_Selected_TextView = -1;
 
@@ -51,6 +53,46 @@ public class MainActivity extends AppCompatActivity {
             for(TextView t:tvs)
                 t.setText("");
             Arrays.fill(localData[Cur_Classification], "");
+        });
+
+        btn_search.setOnClickListener(e->{
+            if(Cur_Selected_TextView!=-1 && !tvs[Cur_Selected_TextView].getText().equals(""))
+            {
+                String s_uri;
+                Intent intent;
+                if(Cur_Classification==2)
+                {
+                    try {
+                        intent = getPackageManager().getLaunchIntentForPackage("com.termux");
+                        startActivity(intent);
+                    } catch (Exception ex) {
+                        s_uri = "https://www.google.com/search?q="
+                                + tvs[Cur_Selected_TextView].getText().toString();
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse((s_uri)));
+                        startActivity(intent);
+                    }
+                }
+                else {
+                    if (Cur_Classification == 0) {
+                        s_uri = tvs[Cur_Selected_TextView].getText().toString();
+                        if (!s_uri.contains("http"))
+                            s_uri = "https://" + s_uri;
+                    } else {
+                        s_uri = "https://www.google.com/search?q="
+                                + tvs[Cur_Selected_TextView].getText().toString();
+                    }
+                    Uri uri = Uri.parse(s_uri);
+                    intent = new Intent(Intent.ACTION_VIEW, uri);
+                    try {
+                        startActivity(intent);
+                    } catch (Exception ex) {
+                        uri = Uri.parse("https://www.google.com/search?q="
+                                + tvs[Cur_Selected_TextView].getText().toString());
+                        intent.setData(uri);
+                        startActivity(intent);
+                    }
+                }
+            }
         });
 
         btn_enter.setOnClickListener(e->{
@@ -194,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
         labels[2] = findViewById(R.id.label_cmd);
         btn_enter = findViewById(R.id.btn_enter);
         btn_clear = findViewById(R.id.btn_clear);
-
+        btn_search = findViewById(R.id.btn_search);
 
 
     }

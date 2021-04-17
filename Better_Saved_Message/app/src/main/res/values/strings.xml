@@ -6,6 +6,7 @@
     <string name="label3">Command</string>
     <string name="btn_enter">enter</string>
     <string name="btn_clear">clear</string>
+    <string name="btn_search">open</string>
 
     <string name="type_hint">Type Something…</string>
 </resources>
