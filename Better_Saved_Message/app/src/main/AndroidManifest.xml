@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Better_Saved_Message"
         android:fullBackupContent="@xml/backup_descriptor">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1196984683606110~8643112824" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
